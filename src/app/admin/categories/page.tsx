@@ -50,7 +50,7 @@ export default function AdminCategories() {
           <h1 className="text-2xl font-bold tracking-tighter text-white">Categories</h1>
           <p className="text-white/40 text-sm">{categories.length} categories</p>
         </div>
-        <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-2 px-4 py-2 bg-white text-black text-sm font-semibold rounded hover:bg-gray-200 transition-colors">
+        <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-2 px-4 py-2 border border-[#ff6b00] bg-[#ff6b00]/10 text-[#ff6b00] text-sm font-semibold rounded hover:bg-[#ff6b00] hover:text-white transition-colors">
           <Plus className="w-4 h-4" /> Add Category
         </button>
       </div>
@@ -81,7 +81,7 @@ export default function AdminCategories() {
               </select>
             </div>
             <div className="flex gap-3">
-              <button type="submit" disabled={saving} className="px-6 py-2 bg-white text-black text-sm font-semibold rounded hover:bg-gray-200 transition-colors disabled:opacity-50">
+              <button type="submit" disabled={saving} className="px-6 py-2 border border-[#ff6b00] bg-[#ff6b00]/10 text-[#ff6b00] text-sm font-semibold rounded hover:bg-[#ff6b00] hover:text-white transition-colors disabled:opacity-50">
                 {saving ? "Saving..." : editId ? "Update" : "Create"}
               </button>
               <button type="button" onClick={resetForm} className="px-6 py-2 bg-white/5 border border-white/10 text-white/60 text-sm rounded hover:bg-white/10 transition-colors">

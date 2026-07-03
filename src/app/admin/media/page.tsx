@@ -55,7 +55,7 @@ export default function AdminMedia() {
         <button
           onClick={() => fileInput.current?.click()}
           disabled={uploading}
-          className="flex items-center gap-2 px-4 py-2 bg-white text-black text-sm font-semibold rounded hover:bg-gray-200 transition-colors disabled:opacity-50"
+          className="flex items-center gap-2 px-4 py-2 border border-[#ff6b00] bg-[#ff6b00]/10 text-[#ff6b00] text-sm font-semibold rounded hover:bg-[#ff6b00] hover:text-white transition-colors disabled:opacity-50"
         >
           <Upload className="w-4 h-4" />
           {uploading ? "Uploading..." : "Upload Files"}

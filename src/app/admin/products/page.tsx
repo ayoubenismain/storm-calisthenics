@@ -51,7 +51,7 @@ export default function AdminProducts() {
           <h1 className="text-2xl font-bold tracking-tighter text-white">Products</h1>
           <p className="text-white/40 text-sm">{products.length} products in database</p>
         </div>
-        <Link href="/admin/products/new" className="flex items-center gap-2 px-4 py-2 bg-white text-black text-sm font-semibold rounded hover:bg-gray-200 transition-colors w-fit">
+        <Link href="/admin/products/new" className="flex items-center gap-2 px-4 py-2 border border-[#ff6b00] bg-[#ff6b00]/10 text-[#ff6b00] text-sm font-semibold rounded hover:bg-[#ff6b00] hover:text-white transition-colors w-fit">
           <Plus className="w-4 h-4" /> Add Product
         </Link>
       </div>

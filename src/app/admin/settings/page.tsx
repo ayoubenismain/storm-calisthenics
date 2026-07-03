@@ -29,19 +29,19 @@ export default function AdminSettings() {
 
   const update = (key: string, value: any) => setSettings((s: any) => ({ ...s, [key]: value }));
 
-  const inputCls = "w-full bg-white/5 border border-white/10 text-white px-4 py-2.5 rounded text-sm focus:outline-none focus:border-white/30 transition-colors placeholder:text-white/20";
+  const inputCls = "w-full bg-white/5 border border-white/10 text-white px-4 py-2.5 rounded text-sm focus:outline-none focus:border-[#ff6b00] transition-colors placeholder:text-white/20";
   const labelCls = "block text-xs text-white/40 uppercase tracking-wider mb-2";
 
   if (loading) return <div className="p-8 text-white/40 text-sm">Loading settings...</div>;
 
   return (
-    <div className="p-6 md:p-8 max-w-4xl space-y-8">
+    <div className="p-6 md:p-8 w-full space-y-8">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tighter text-white">Settings</h1>
           <p className="text-white/40 text-sm">Configure your Storm Barz store</p>
         </div>
-        <button onClick={handleSave} disabled={saving} className="flex items-center gap-2 px-5 py-2.5 bg-white text-black text-sm font-semibold rounded hover:bg-gray-200 transition-colors disabled:opacity-50">
+        <button onClick={handleSave} disabled={saving} className="flex items-center gap-2 px-5 py-2.5 border border-[#ff6b00] bg-[#ff6b00]/10 text-[#ff6b00] text-sm font-semibold rounded hover:bg-[#ff6b00] hover:text-white transition-colors disabled:opacity-50">
           {saved ? <Check className="w-4 h-4" /> : <Save className="w-4 h-4" />}
           {saving ? "Saving..." : saved ? "Saved!" : "Save Settings"}
         </button>
@@ -129,18 +129,6 @@ export default function AdminSettings() {
         </div>
       </section>
 
-      {/* SEO */}
-      <section className="bg-white/3 border border-white/5 rounded-lg p-6 space-y-4">
-        <h2 className="text-sm font-semibold text-white/60 uppercase tracking-wider">SEO Defaults</h2>
-        <div>
-          <label className={labelCls}>Default SEO Title</label>
-          <input className={inputCls} value={settings.seoTitle || ""} onChange={(e) => update("seoTitle", e.target.value)} />
-        </div>
-        <div>
-          <label className={labelCls}>Default SEO Description</label>
-          <textarea rows={3} className={inputCls + " resize-none"} value={settings.seoDescription || ""} onChange={(e) => update("seoDescription", e.target.value)} />
-        </div>
-      </section>
 
       {/* Storm Effects */}
       <section className="bg-white/3 border border-white/5 rounded-lg p-6 space-y-4">
@@ -148,20 +136,30 @@ export default function AdminSettings() {
         <div className="grid md:grid-cols-2 gap-4">
           <div>
             <label className={labelCls}>Storm Intensity</label>
-            <select className={inputCls} value={settings.stormIntensity || "heavy"} onChange={(e) => update("stormIntensity", e.target.value)}>
-              <option value="calm">Calm</option>
-              <option value="heavy">Heavy</option>
-              <option value="thunder">Thunder Mode</option>
-            </select>
+            <div className="relative">
+              <select className={inputCls + " appearance-none"} value={settings.stormIntensity || "heavy"} onChange={(e) => update("stormIntensity", e.target.value)}>
+                <option value="calm">Calm</option>
+                <option value="heavy">Heavy</option>
+                <option value="thunder">Thunder Mode</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-white/40">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+              </div>
+            </div>
           </div>
           <div>
             <label className={labelCls}>Homepage Mood</label>
-            <select className={inputCls} value={settings.homepageMood || "blue-thunder"} onChange={(e) => update("homepageMood", e.target.value)}>
-              <option value="dark-metal">Dark Metal</option>
-              <option value="blue-thunder">Blue Thunder</option>
-              <option value="smoke-arena">Smoke Arena</option>
-              <option value="minimal-luxury">Minimal Luxury</option>
-            </select>
+            <div className="relative">
+              <select className={inputCls + " appearance-none"} value={settings.homepageMood || "blue-thunder"} onChange={(e) => update("homepageMood", e.target.value)}>
+                <option value="dark-metal">Dark Metal</option>
+                <option value="blue-thunder">Blue Thunder</option>
+                <option value="smoke-arena">Smoke Arena</option>
+                <option value="minimal-luxury">Minimal Luxury</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-white/40">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+              </div>
+            </div>
           </div>
         </div>
         <div className="flex flex-wrap gap-6">
@@ -179,7 +177,7 @@ export default function AdminSettings() {
         </div>
       </section>
 
-      <button onClick={handleSave} disabled={saving} className="px-8 py-3 bg-white text-black font-semibold rounded hover:bg-gray-200 transition-colors disabled:opacity-50 text-sm uppercase tracking-wider">
+      <button onClick={handleSave} disabled={saving} className="px-8 py-3 border border-[#ff6b00] bg-[#ff6b00]/10 text-[#ff6b00] font-semibold rounded hover:bg-[#ff6b00] hover:text-white transition-colors disabled:opacity-50 text-sm uppercase tracking-wider">
         {saving ? "Saving..." : saved ? "Saved ✓" : "Save All Settings"}
       </button>
     </div>

@@ -4,7 +4,6 @@ export interface IProduct extends Document {
   name: string;
   slug: string;
   category: mongoose.Types.ObjectId;
-  shortDescription: string;
   description: string;
   price: number;
   discountPrice?: number;
@@ -23,20 +22,6 @@ export interface IProduct extends Document {
     stock: number;
     sku: string;
   }[];
-  specs: {
-    label: string;
-    value: string;
-  }[];
-  hotspots: {
-    label: string;
-    description: string;
-    position: { x: number; y: number; z: number };
-    type: string;
-  }[];
-  trainingModes: string[];
-  sceneStyle: 'Dark' | 'Metal' | 'Lightning' | 'Smoke';
-  seoTitle?: string;
-  seoDescription?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -46,7 +31,6 @@ const ProductSchema = new Schema<IProduct>(
     name: { type: String, required: true },
     slug: { type: String, required: true, unique: true },
     category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
-    shortDescription: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
     discountPrice: { type: Number },
@@ -67,28 +51,6 @@ const ProductSchema = new Schema<IProduct>(
         sku: { type: String, required: true },
       },
     ],
-    specs: [
-      {
-        label: { type: String, required: true },
-        value: { type: String, required: true },
-      },
-    ],
-    hotspots: [
-      {
-        label: { type: String, required: true },
-        description: { type: String, required: true },
-        position: {
-          x: { type: Number, required: true },
-          y: { type: Number, required: true },
-          z: { type: Number, required: true },
-        },
-        type: { type: String, required: true },
-      },
-    ],
-    trainingModes: [{ type: String }],
-    sceneStyle: { type: String, enum: ['Dark', 'Metal', 'Lightning', 'Smoke'], default: 'Dark' },
-    seoTitle: { type: String },
-    seoDescription: { type: String },
   },
   {
     timestamps: true,

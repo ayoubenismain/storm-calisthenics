@@ -48,7 +48,7 @@ export default function AdminDashboard() {
           <p className="text-white/40 text-sm mt-1">Your real-time control room</p>
         </div>
         <div className="flex gap-3">
-          <Link href="/admin/products/new" className="flex items-center gap-2 px-4 py-2 bg-white text-black text-sm font-semibold rounded hover:bg-gray-200 transition-colors">
+          <Link href="/admin/products/new" className="flex items-center gap-2 px-4 py-2 border border-[#ff6b00] bg-[#ff6b00]/10 text-[#ff6b00] text-sm font-semibold rounded hover:bg-[#ff6b00] hover:text-white transition-colors">
             <Plus className="w-4 h-4" /> Add Product
           </Link>
         </div>
@@ -135,7 +135,7 @@ export default function AdminDashboard() {
             { label: "Media Library", href: "/admin/media" },
             { label: "Settings", href: "/admin/settings" },
           ].map(({ label, href }) => (
-            <Link key={href} href={href} className="bg-white/3 border border-white/5 hover:border-white/20 hover:bg-white/5 rounded-lg px-4 py-4 text-sm text-white/70 hover:text-white transition-all text-center">
+            <Link key={href} href={href} className="border border-[#ff6b00]/30 hover:border-[#ff6b00] bg-[#ff6b00]/5 hover:bg-[#ff6b00]/10 rounded-lg px-4 py-4 text-sm text-[#ff6b00] hover:text-white transition-all text-center">
               {label}
             </Link>
           ))}
