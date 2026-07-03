@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import MediaAsset from '@/models/MediaAsset';
-import { uploadFileToR2, validateFileType, validateFileSize } from '@/lib/r2';
+import { uploadFileToCloudinary, validateFileType, validateFileSize } from '@/lib/cloudinary';
 
 const ALLOWED_TYPES: Record<string, string> = {
   'image/jpeg': 'image',
@@ -54,15 +54,14 @@ export async function POST(req: NextRequest) {
     const buffer = Buffer.from(await file.arrayBuffer());
     const filename = file.name.replace(/\s+/g, '-');
 
-    // Use R2 if configured, otherwise save to /public
     let url: string;
     let key: string;
 
-    const hasR2 = process.env.CLOUDFLARE_R2_ACCOUNT_ID && 
-                  process.env.CLOUDFLARE_R2_ACCOUNT_ID !== 'your_account_id';
+    const hasCloudinary = process.env.CLOUDINARY_CLOUD_NAME && 
+                          process.env.CLOUDINARY_CLOUD_NAME !== 'your_cloud_name';
 
-    if (hasR2) {
-      const result = await uploadFileToR2(buffer, filename, mimeType);
+    if (hasCloudinary) {
+      const result = await uploadFileToCloudinary(buffer, filename, mimeType);
       url = result.url;
       key = result.key;
     } else {
@@ -82,7 +81,7 @@ export async function POST(req: NextRequest) {
       originalName: file.name,
       url,
       key,
-      type: assetType,
+      type: assetType as 'image' | 'video' | 'model' | 'sound',
       mimeType,
       size: file.size,
     });
