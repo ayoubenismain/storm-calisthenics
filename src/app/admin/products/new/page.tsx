@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { ArrowLeft, Upload, X } from "lucide-react";
 import Link from "next/link";
 
+interface Category { _id: string; name: string; }
 
 
 export default function NewProduct() {
