@@ -33,8 +33,8 @@ export default function AdminSidebar() {
     <div className="flex flex-col h-full">
       {/* Logo */}
       <div className={`flex items-center gap-3 p-6 border-b border-white/5 ${collapsed ? "justify-center" : ""}`}>
-        <div className="w-8 h-8 bg-white/10 border border-white/20 flex items-center justify-center">
-          <Zap className="w-4 h-4 text-white" />
+        <div className="w-8 h-8 bg-[#ff6b00]/10 border border-[#ff6b00]/40 flex items-center justify-center">
+          <Zap className="w-4 h-4 text-[#ff6b00]" />
         </div>
         {!collapsed && (
           <div>
@@ -55,11 +55,11 @@ export default function AdminSidebar() {
               onClick={() => setMobileOpen(false)}
               className={`flex items-center gap-3 px-3 py-2.5 rounded transition-all duration-200 group
                 ${active
-                  ? "bg-white text-black"
-                  : "text-white/50 hover:text-white hover:bg-white/5"
+                  ? "bg-[#ff6b00]/15 text-[#ff6b00] border border-[#ff6b00]/30"
+                  : "text-white/50 hover:text-white hover:bg-white/5 border border-transparent"
                 } ${collapsed ? "justify-center" : ""}`}
             >
-              <Icon className={`w-4 h-4 shrink-0 ${active ? "text-black" : ""}`} />
+              <Icon className={`w-4 h-4 shrink-0 ${active ? "text-[#ff6b00]" : ""}`} />
               {!collapsed && <span className="text-sm font-medium">{label}</span>}
             </Link>
           );
@@ -115,7 +115,7 @@ export default function AdminSidebar() {
 
       {/* Desktop sidebar */}
       <aside
-        className={`hidden md:flex flex-col h-full bg-[#0a0a0c] border-r border-white/5 transition-all duration-300 ${collapsed ? "w-16" : "w-60"}`}
+        className={`hidden md:flex flex-col sticky top-0 h-screen bg-[#0a0a0c] border-r border-white/5 transition-all duration-300 shrink-0 ${collapsed ? "w-16" : "w-60"}`}
       >
         <SidebarContent />
       </aside>

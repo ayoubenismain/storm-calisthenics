@@ -41,7 +41,7 @@ export default function AdminCategories() {
     setCategories((prev) => prev.filter((c) => c._id !== id));
   };
 
-  const inputCls = "w-full bg-white/5 border border-white/10 text-white px-4 py-2.5 rounded text-sm focus:outline-none focus:border-white/30 transition-colors placeholder:text-white/20";
+  const inputCls = "w-full bg-white/5 border border-white/10 text-white px-4 py-2.5 rounded text-sm focus:outline-none focus:border-[#ff6b00] transition-colors placeholder:text-white/20";
 
   return (
     <div className="p-6 md:p-8 space-y-6">
@@ -75,10 +75,15 @@ export default function AdminCategories() {
             </div>
             <div>
               <label className="block text-xs text-white/40 uppercase tracking-wider mb-2">Status</label>
-              <select className={inputCls} value={form.status} onChange={(e) => setForm((p) => ({ ...p, status: e.target.value }))}>
+              <div className="relative">
+              <select className={inputCls + " appearance-none"} value={form.status} onChange={(e) => setForm((p) => ({ ...p, status: e.target.value }))}>
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
               </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-white/40">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+              </div>
+            </div>
             </div>
             <div className="flex gap-3">
               <button type="submit" disabled={saving} className="px-6 py-2 border border-[#ff6b00] bg-[#ff6b00]/10 text-[#ff6b00] text-sm font-semibold rounded hover:bg-[#ff6b00] hover:text-white transition-colors disabled:opacity-50">

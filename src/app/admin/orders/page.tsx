@@ -55,7 +55,7 @@ export default function AdminOrders() {
       {/* Filters */}
       <div className="flex flex-wrap gap-2">
         {["", ...STATUSES].map((s) => (
-          <button key={s} onClick={() => setFilter(s)} className={`px-4 py-1.5 rounded text-sm border transition-all ${filter === s ? "bg-white text-black border-white" : "bg-white/5 text-white/50 border-white/10 hover:border-white/30"}`}>
+          <button key={s} onClick={() => setFilter(s)} className={`px-4 py-1.5 rounded text-sm border transition-all ${filter === s ? "bg-[#ff6b00]/15 text-[#ff6b00] border-[#ff6b00]/50" : "bg-white/5 text-white/50 border-white/10 hover:border-white/30"}`}>
             {s ? s.charAt(0).toUpperCase() + s.slice(1) : "All"}
           </button>
         ))}
@@ -119,7 +119,7 @@ export default function AdminOrders() {
                 <div className="flex flex-wrap gap-2">
                   {STATUSES.map((s) => (
                     <button key={s} onClick={() => updateStatus(selected._id, s)} disabled={updating || selected.orderStatus === s}
-                      className={`px-3 py-1.5 rounded text-xs border transition-all capitalize ${selected.orderStatus === s ? "bg-white text-black border-white" : "bg-white/5 text-white/50 border-white/10 hover:border-white/30"}`}>
+                      className={`px-3 py-1.5 rounded text-xs border transition-all capitalize ${selected.orderStatus === s ? "bg-[#ff6b00]/15 text-[#ff6b00] border-[#ff6b00]/40" : "bg-white/5 text-white/50 border-white/10 hover:border-[#ff6b00]/30 hover:text-[#ff6b00]"}`}>
                       {s}
                     </button>
                   ))}
