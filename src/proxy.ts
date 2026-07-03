@@ -12,7 +12,7 @@ export async function proxy(request: NextRequest) {
     if (!payload || payload.role !== 'admin') return NextResponse.redirect(new URL('/admin/login', request.url));
   }
 
-  if (pathname.startsWith('/api/admin')) {
+  if (pathname.startsWith('/api/admin') && !pathname.startsWith('/api/admin/auth/login')) {
     const token = request.cookies.get('storm_admin_session')?.value;
     if (!token) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     const payload = await verifyToken(token);
