@@ -123,11 +123,11 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* Creative Image Gallery Section */}
-        <CreativeGallery />
-
         {/* Premium Animated Products Section */}
         <PremiumProducts products={products} />
+
+        {/* Creative Image Gallery Section */}
+        <CreativeGallery />
 
         {/* Contact Section - White Background */}
         <section id="contact" className="bg-gray-50 text-black py-24 px-6">
