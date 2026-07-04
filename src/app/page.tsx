@@ -7,41 +7,83 @@ import EnterStormOverlay from "@/components/public/EnterStormOverlay";
 import LightningEffect from "@/components/public/LightningEffect";
 import CreativeGallery from "@/components/public/CreativeGallery";
 import PremiumProducts from "@/components/public/PremiumProducts";
-
 import Footer from "@/components/public/Footer";
 import Link from "next/link";
 import { ShoppingBag, Mail, Phone, MapPin, Send } from "lucide-react";
 
 interface Product {
-  _id: string; name: string; slug: string; price: number;
-  discountPrice?: number; images: string[]; description: string;
+  _id: string;
+  name: string;
+  slug: string;
+  price: number;
+  discountPrice?: number;
+  images: string[];
+  description: string;
 }
 
 export default function Home() {
   const [hasEntered, setHasEntered] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [settings, setSettings] = useState<any>({});
-  const [contactForm, setContactForm] = useState({ name: "", email: "", message: "" });
+  const [contactForm, setContactForm] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
   useEffect(() => {
-    fetch("/api/products?limit=6").then((r) => r.json()).then((d) => setProducts(d.products || [])).catch(() => {});
-    fetch("/api/settings").then((r) => r.json()).then((d) => setSettings(d.settings || {})).catch(() => {});
+    fetch("/api/products?limit=6")
+      .then((r) => r.json())
+      .then((d) => setProducts(d.products || []))
+      .catch(() => {});
+
+    fetch("/api/settings")
+      .then((r) => r.json())
+      .then((d) => setSettings(d.settings || {}))
+      .catch(() => {});
   }, []);
 
   return (
     <main className="relative min-h-screen bg-storm-dark text-white overflow-hidden">
       {!hasEntered && <EnterStormOverlay onEnter={() => setHasEntered(true)} />}
 
-      <div className={`transition-opacity duration-1000 ${hasEntered ? "opacity-100" : "opacity-0"}`}>
+      <div
+        className={`transition-opacity duration-1000 ${
+          hasEntered ? "opacity-100" : "opacity-0"
+        }`}
+      >
         {/* Navigation */}
         <nav className="fixed top-0 w-full z-40 px-6 py-4 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent">
-          <div className="text-2xl font-bold tracking-tighter font-heading text-white">STORM</div>
-          <div className="hidden md:flex gap-8 text-sm uppercase tracking-wider">
-            <Link href="/products" className="text-white/70 hover:text-white transition-colors">Shop</Link>
-            <Link href="#products" className="text-white/70 hover:text-white transition-colors">Products</Link>
-            <Link href="#contact" className="text-white/70 hover:text-white transition-colors">Contact</Link>
+          <div className="text-2xl font-bold tracking-tighter font-heading text-white">
+            STORM
           </div>
-          <Link href="/cart" className="relative text-white/70 hover:text-white transition-colors" aria-label="Cart">
+
+          <div className="hidden md:flex gap-8 text-sm uppercase tracking-wider">
+            <Link
+              href="/products"
+              className="text-white/70 hover:text-white transition-colors"
+            >
+              Shop
+            </Link>
+            <Link
+              href="#products"
+              className="text-white/70 hover:text-white transition-colors"
+            >
+              Products
+            </Link>
+            <Link
+              href="#contact"
+              className="text-white/70 hover:text-white transition-colors"
+            >
+              Contact
+            </Link>
+          </div>
+
+          <Link
+            href="/cart"
+            className="relative text-white/70 hover:text-white transition-colors"
+            aria-label="Cart"
+          >
             <ShoppingBag className="w-5 h-5" />
           </Link>
         </nav>
@@ -53,15 +95,27 @@ export default function Home() {
           {/* Background */}
           <div className="absolute inset-0 z-0">
             <div className="relative w-full h-full">
+              {/* Mobile Background */}
               <Image
-                src="/desktop_bg.png"
-                alt="Storm Background"
+                src="/mobile_bg.png"
+                alt="Storm Mobile Background"
                 fill
                 priority
                 sizes="100vw"
-                className="object-cover object-center opacity-70"
+                className="object-cover object-center opacity-70 md:hidden"
+              />
+
+              {/* Desktop Background */}
+              <Image
+                src="/desktop_bg.png"
+                alt="Storm Desktop Background"
+                fill
+                priority
+                sizes="100vw"
+                className="hidden object-cover object-center opacity-70 md:block"
               />
             </div>
+
             <div className="absolute inset-0 bg-black/30" />
             <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black" />
           </div>
@@ -85,6 +139,7 @@ export default function Home() {
             >
               BECOME
             </motion.h1>
+
             <motion.p
               initial={{ opacity: 0, y: 40 }}
               animate={hasEntered ? { opacity: 1, y: 0 } : {}}
@@ -109,10 +164,17 @@ export default function Home() {
               transition={{ duration: 1, delay: 1.2 }}
               className="flex flex-col sm:flex-row gap-4 items-center justify-center w-full max-w-sm sm:max-w-none"
             >
-              <Link href="/products" className="w-full sm:w-auto px-10 py-4 bg-white text-black font-bold uppercase tracking-widest text-sm hover:bg-gray-100 transition-colors text-center">
+              <Link
+                href="/products"
+                className="w-full sm:w-auto px-10 py-4 bg-white text-black font-bold uppercase tracking-widest text-sm hover:bg-gray-100 transition-colors text-center"
+              >
                 Shop Now
               </Link>
-              <Link href="#products" className="w-full sm:w-auto px-10 py-4 border border-white/30 text-white font-semibold uppercase tracking-widest text-sm hover:border-white hover:bg-white/5 transition-all text-center">
+
+              <Link
+                href="#products"
+                className="w-full sm:w-auto px-10 py-4 border border-white/30 text-white font-semibold uppercase tracking-widest text-sm hover:border-white hover:bg-white/5 transition-all text-center"
+              >
                 Explore
               </Link>
             </motion.div>
@@ -135,15 +197,17 @@ export default function Home() {
         {/* Creative Image Gallery Section */}
         <CreativeGallery />
 
-        {/* Contact Section - White Background */}
+        {/* Contact Section */}
         <section id="contact" className="bg-gray-50 text-black py-24 px-6">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-heading tracking-tighter font-bold text-gray-900 mb-4">
                 GET IN TOUCH
               </h2>
+
               <p className="text-gray-500 text-lg max-w-xl mx-auto">
-                Questions about our products? Want to collaborate? We&apos;d love to hear from you.
+                Questions about our products? Want to collaborate? We&apos;d love
+                to hear from you.
               </p>
             </div>
 
@@ -154,69 +218,119 @@ export default function Home() {
                   <div className="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center shrink-0">
                     <Mail className="w-5 h-5 text-white" />
                   </div>
+
                   <div>
                     <h3 className="font-bold text-gray-900 text-lg">Email</h3>
-                    <p className="text-gray-500">{settings.contactEmail || "contact@stormbarz.com"}</p>
+                    <p className="text-gray-500">
+                      {settings.contactEmail || "contact@stormbarz.com"}
+                    </p>
                   </div>
                 </div>
+
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center shrink-0">
                     <Phone className="w-5 h-5 text-white" />
                   </div>
+
                   <div>
                     <h3 className="font-bold text-gray-900 text-lg">Phone</h3>
-                    <p className="text-gray-500">{settings.contactPhone || "+216 XX XXX XXX"}</p>
+                    <p className="text-gray-500">
+                      {settings.contactPhone || "+216 XX XXX XXX"}
+                    </p>
                   </div>
                 </div>
+
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center shrink-0">
                     <MapPin className="w-5 h-5 text-white" />
                   </div>
+
                   <div>
                     <h3 className="font-bold text-gray-900 text-lg">Location</h3>
-                    <p className="text-gray-500">{settings.contactAddress || "Tunisia"}</p>
+                    <p className="text-gray-500">
+                      {settings.contactAddress || "Tunisia"}
+                    </p>
                   </div>
                 </div>
               </div>
 
               {/* Contact Form */}
               <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-                <form className="space-y-5" onSubmit={(e) => { e.preventDefault(); alert("Message sent! We will get back to you."); setContactForm({ name: "", email: "", message: "" }); }}>
+                <form
+                  className="space-y-5"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    alert("Message sent! We will get back to you.");
+                    setContactForm({
+                      name: "",
+                      email: "",
+                      message: "",
+                    });
+                  }}
+                >
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Name
+                    </label>
                     <input
                       type="text"
                       required
                       value={contactForm.name}
-                      onChange={(e) => setContactForm((p) => ({ ...p, name: e.target.value }))}
+                      onChange={(e) =>
+                        setContactForm((p) => ({
+                          ...p,
+                          name: e.target.value,
+                        }))
+                      }
                       className="w-full bg-gray-50 border border-gray-200 text-gray-900 px-4 py-3 rounded-lg text-sm focus:outline-none focus:border-gray-400 transition-colors"
                       placeholder="Your name"
                     />
                   </div>
+
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Email
+                    </label>
                     <input
                       type="email"
                       required
                       value={contactForm.email}
-                      onChange={(e) => setContactForm((p) => ({ ...p, email: e.target.value }))}
+                      onChange={(e) =>
+                        setContactForm((p) => ({
+                          ...p,
+                          email: e.target.value,
+                        }))
+                      }
                       className="w-full bg-gray-50 border border-gray-200 text-gray-900 px-4 py-3 rounded-lg text-sm focus:outline-none focus:border-gray-400 transition-colors"
                       placeholder="your@email.com"
                     />
                   </div>
+
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Message
+                    </label>
                     <textarea
                       rows={4}
                       required
                       value={contactForm.message}
-                      onChange={(e) => setContactForm((p) => ({ ...p, message: e.target.value }))}
+                      onChange={(e) =>
+                        setContactForm((p) => ({
+                          ...p,
+                          message: e.target.value,
+                        }))
+                      }
                       className="w-full bg-gray-50 border border-gray-200 text-gray-900 px-4 py-3 rounded-lg text-sm focus:outline-none focus:border-gray-400 transition-colors resize-none"
                       placeholder="Your message..."
                     />
                   </div>
-                  <button type="submit" className="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors flex items-center justify-center gap-2">
-                    <Send className="w-4 h-4" /> Send Message
+
+                  <button
+                    type="submit"
+                    className="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors flex items-center justify-center gap-2"
+                  >
+                    <Send className="w-4 h-4" />
+                    Send Message
                   </button>
                 </form>
               </div>
