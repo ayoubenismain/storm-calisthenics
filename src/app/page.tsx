@@ -50,7 +50,7 @@ export default function Home() {
           {/* Background */}
           <div className="absolute inset-0 z-0">
             <picture>
-              <source media="(max-width: 768px)" srcSet="/mobile_bg.jpg" type="image/jpeg" />
+              <source media="(max-width: 768px)" srcSet="/mobile_bg.png" type="image/png" />
               <source media="(min-width: 769px)" srcSet="/desktop_bg.png" type="image/png" />
               <img src="/desktop_bg.png" alt="Storm Background" className="w-full h-full object-cover object-center opacity-70" />
             </picture>
