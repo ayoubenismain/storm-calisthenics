@@ -90,13 +90,24 @@ export default function AdminSidebar() {
 
   return (
     <>
-      {/* Mobile toggle button */}
-      <button
-        className="md:hidden fixed top-4 left-4 z-50 w-10 h-10 bg-white/10 border border-white/10 flex items-center justify-center rounded"
-        onClick={() => setMobileOpen(!mobileOpen)}
-      >
-        {mobileOpen ? <X className="w-4 h-4 text-white" /> : <Menu className="w-4 h-4 text-white" />}
-      </button>
+      {/* Mobile top bar */}
+      <div className="md:hidden flex items-center justify-between p-4 bg-[#0a0a0c] border-b border-white/5 sticky top-0 z-50 w-full">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 bg-[#ff6b00]/10 border border-[#ff6b00]/40 flex items-center justify-center">
+            <Zap className="w-4 h-4 text-[#ff6b00]" />
+          </div>
+          <div>
+            <p className="font-bold text-white tracking-tighter text-lg leading-none">STORM</p>
+            <p className="text-[10px] text-white/40 tracking-widest uppercase">Control Room</p>
+          </div>
+        </div>
+        <button
+          className="w-10 h-10 bg-white/10 border border-white/10 flex items-center justify-center rounded hover:bg-white/20 transition-colors shrink-0"
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
+          {mobileOpen ? <X className="w-4 h-4 text-white" /> : <Menu className="w-4 h-4 text-white" />}
+        </button>
+      </div>
 
       {/* Mobile overlay */}
       {mobileOpen && (

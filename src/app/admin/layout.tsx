@@ -7,9 +7,9 @@ export const metadata: Metadata = {
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen bg-[#0d0d10] text-white">
+    <div className="flex flex-col md:flex-row min-h-screen bg-[#0d0d10] text-white w-full">
       <AdminSidebar />
-      <main className="flex-1 w-full">
+      <main className="flex-1 w-full min-w-0">
         {children}
       </main>
     </div>

@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import EnterStormOverlay from "@/components/public/EnterStormOverlay";
 import LightningEffect from "@/components/public/LightningEffect";
+import CreativeGallery from "@/components/public/CreativeGallery";
+import PremiumProducts from "@/components/public/PremiumProducts";
 
 import Footer from "@/components/public/Footer";
 import Link from "next/link";
@@ -121,74 +123,11 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* Products Section - White Background */}
-        <section id="products" className="bg-white text-black py-24 px-6">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-6xl font-heading tracking-tighter font-bold text-gray-900 mb-4">
-                BUILT FOR EXPLOSIVE CONTROL
-              </h2>
-              <p className="text-gray-500 text-lg max-w-2xl mx-auto">
-                Premium calisthenics equipment designed for athletes who demand more.
-              </p>
-            </div>
+        {/* Creative Image Gallery Section */}
+        <CreativeGallery />
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {products.length > 0 ? products.map((product) => (
-                <Link href={`/products/${product.slug}`} key={product._id} className="group">
-                  <div className="bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                    <div className="aspect-square bg-gray-100 relative overflow-hidden">
-                      {product.images?.[0] ? (
-                        <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-gray-300 text-sm">No Image</div>
-                      )}
-                      {product.discountPrice && (
-                        <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
-                          SALE
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-gray-600 transition-colors">
-                        {product.name}
-                      </h3>
-                      <p className="text-gray-500 text-sm mb-4 line-clamp-2">{product.description}</p>
-                      <div className="flex items-center gap-3">
-                        {product.discountPrice ? (
-                          <>
-                            <span className="text-xl font-bold text-gray-900">{product.discountPrice} TND</span>
-                            <span className="text-sm text-gray-400 line-through">{product.price} TND</span>
-                          </>
-                        ) : (
-                          <span className="text-xl font-bold text-gray-900">{product.price} TND</span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              )) : (
-                /* Placeholder products when DB is empty */
-                [1, 2, 3].map((i) => (
-                  <div key={i} className="bg-gray-50 rounded-2xl overflow-hidden border border-gray-100">
-                    <div className="aspect-square bg-gray-200 animate-pulse" />
-                    <div className="p-6 space-y-3">
-                      <div className="h-5 bg-gray-200 rounded animate-pulse w-3/4" />
-                      <div className="h-4 bg-gray-200 rounded animate-pulse" />
-                      <div className="h-6 bg-gray-200 rounded animate-pulse w-1/3" />
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
-
-            <div className="text-center mt-12">
-              <Link href="/products" className="inline-block px-8 py-4 bg-gray-900 text-white font-semibold uppercase tracking-wider hover:bg-gray-700 transition-colors rounded-lg">
-                View All Products
-              </Link>
-            </div>
-          </div>
-        </section>
+        {/* Premium Animated Products Section */}
+        <PremiumProducts products={products} />
 
         {/* Contact Section - White Background */}
         <section id="contact" className="bg-gray-50 text-black py-24 px-6">
