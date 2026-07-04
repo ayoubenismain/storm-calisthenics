@@ -24,9 +24,14 @@ export default function AdminSidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  // Do not render the sidebar on the root admin login page
+  if (pathname === "/admin") {
+    return null;
+  }
+
   const handleLogout = async () => {
     await fetch("/api/admin/auth/logout", { method: "POST" });
-    router.push("/admin/login");
+    router.push("/admin");
   };
 
   const SidebarContent = () => (

@@ -60,7 +60,6 @@ export default function AdminLogin() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              placeholder="admin@stormbarz.com"
               className="w-full bg-white/5 border border-white/10 text-white px-4 py-3 rounded text-sm focus:outline-none focus:border-white/30 transition-colors placeholder:text-white/20"
             />
           </div>
@@ -72,7 +71,6 @@ export default function AdminLogin() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              placeholder="••••••••"
               className="w-full bg-white/5 border border-white/10 text-white px-4 py-3 rounded text-sm focus:outline-none focus:border-white/30 transition-colors placeholder:text-white/20"
             />
           </div>
