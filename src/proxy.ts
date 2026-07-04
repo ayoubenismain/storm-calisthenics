@@ -4,12 +4,13 @@ import { verifyToken } from './lib/auth';
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const isAdminHomeRoute = pathname === '/admin' || pathname === '/admin/';
 
-  if (pathname.startsWith('/admin') && !pathname.startsWith('/admin/login')) {
+  if (pathname.startsWith('/admin') && !isAdminHomeRoute && !pathname.startsWith('/admin/login')) {
     const token = request.cookies.get('storm_admin_session')?.value;
-    if (!token) return NextResponse.redirect(new URL('/admin/login', request.url));
+    if (!token) return NextResponse.redirect(new URL('/admin', request.url));
     const payload = await verifyToken(token);
-    if (!payload || payload.role !== 'admin') return NextResponse.redirect(new URL('/admin/login', request.url));
+    if (!payload || payload.role !== 'admin') return NextResponse.redirect(new URL('/admin', request.url));
   }
 
   if (pathname.startsWith('/api/admin') && !pathname.startsWith('/api/admin/auth/login')) {
