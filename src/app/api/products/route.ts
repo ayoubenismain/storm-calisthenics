@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
     if (featured === 'true') filter.featured = true;
 
     const products = await Product.find(filter)
-      .populate('category', 'name slug')
+      .populate({ path: 'category', select: 'name slug', model: Category })
       .sort({ createdAt: -1 })
       .limit(limit);
 

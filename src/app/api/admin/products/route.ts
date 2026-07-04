@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
     if (category) filter.category = category;
     if (search) filter.name = { $regex: search, $options: 'i' };
 
-    const products = await Product.find(filter).populate('category', 'name slug').sort({ createdAt: -1 });
+    const products = await Product.find(filter).populate({ path: 'category', select: 'name slug', model: Category }).sort({ createdAt: -1 });
     return NextResponse.json({ products });
   } catch (err) {
     return NextResponse.json({ error: 'Server error' }, { status: 500 });

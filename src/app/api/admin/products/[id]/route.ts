@@ -7,7 +7,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
   try {
     await connectToDatabase();
     const { id } = await params;
-    const product = await Product.findById(id).populate('category', 'name slug');
+    const product = await Product.findById(id).populate({ path: 'category', select: 'name slug', model: Category });
     if (!product) return NextResponse.json({ error: 'Not found' }, { status: 404 });
     return NextResponse.json({ product });
   } catch (err) {
