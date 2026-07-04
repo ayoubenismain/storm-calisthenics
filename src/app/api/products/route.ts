@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import Product from '@/models/Product';
+import Category from '@/models/Category';
 
 export async function GET(req: NextRequest) {
   try {
@@ -21,6 +22,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ products });
   } catch (err) {
+    console.error('Error fetching products:', err);
     return NextResponse.json({ error: 'Server error' }, { status: 500 });
   }
 }
