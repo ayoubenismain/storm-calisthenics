@@ -9,6 +9,10 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-heading" });
 export const metadata: Metadata = {
   title: "STORM BARZ | Premium Calisthenics Equipment",
   description: "Become the Storm. Premium parallettes built for control, power, and clean movement. Luxury calisthenics equipment.",
+  icons: [
+    { rel: "icon", url: "/lightning.png" },
+    { rel: "apple-touch-icon", url: "/lightning.png" },
+  ],
 };
 
 export default function RootLayout({

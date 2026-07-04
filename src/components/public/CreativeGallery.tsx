@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const galleryItems = [
@@ -61,10 +62,12 @@ export default function CreativeGallery() {
               style={{ flex: flexBasis }}
             >
               {/* Background Image */}
-              <img
+              <Image
                 src={item.src}
                 alt={item.title}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110 filter brightness-[0.6] group-hover:brightness-[0.9]"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 20vw"
+                className="absolute inset-0 object-cover transition-transform duration-1000 ease-out group-hover:scale-110 filter brightness-[0.6] group-hover:brightness-[0.9]"
               />
               
               {/* Overlay Gradient */}

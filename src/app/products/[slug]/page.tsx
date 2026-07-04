@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { ShoppingBag, Minus, Plus, ChevronLeft, Check } from "lucide-react";
@@ -74,9 +75,9 @@ export default function ProductDetail() {
         <div className="grid md:grid-cols-2 gap-12">
           {/* Images */}
           <div>
-            <div className="aspect-square bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 mb-4">
+            <div className="aspect-square bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 mb-4 relative">
               {product.images?.[selectedImage] ? (
-                <img src={product.images[selectedImage]} alt={product.name} className="w-full h-full object-cover" />
+                <Image src={product.images[selectedImage]} alt={product.name} fill className="object-cover" sizes="100vw" />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-gray-300">No Image</div>
               )}
@@ -85,7 +86,9 @@ export default function ProductDetail() {
               <div className="flex gap-3">
                 {product.images.map((img, i) => (
                   <button key={i} onClick={() => setSelectedImage(i)} className={`w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${i === selectedImage ? "border-gray-900" : "border-gray-200"}`}>
-                    <img src={img} alt="" className="w-full h-full object-cover" />
+                    <div className="relative w-full h-full">
+                      <Image src={img} alt="" fill className="object-cover" sizes="80px" />
+                    </div>
                   </button>
                 ))}
               </div>

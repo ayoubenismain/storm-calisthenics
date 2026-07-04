@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import EnterStormOverlay from "@/components/public/EnterStormOverlay";
 import LightningEffect from "@/components/public/LightningEffect";
@@ -51,11 +52,16 @@ export default function Home() {
 
           {/* Background */}
           <div className="absolute inset-0 z-0">
-            <picture>
-              <source media="(max-width: 768px)" srcSet="/mobile_bg.png" type="image/png" />
-              <source media="(min-width: 769px)" srcSet="/desktop_bg.png" type="image/png" />
-              <img src="/desktop_bg.png" alt="Storm Background" className="w-full h-full object-cover object-center opacity-70" />
-            </picture>
+            <div className="relative w-full h-full">
+              <Image
+                src="/desktop_bg.png"
+                alt="Storm Background"
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover object-center opacity-70"
+              />
+            </div>
             <div className="absolute inset-0 bg-black/30" />
             <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black" />
           </div>

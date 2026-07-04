@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -21,10 +22,12 @@ const SimpleCard = ({ product }: { product: Product }) => {
         
         {/* Simple Image Container */}
         <div className="relative w-full aspect-square mb-6 flex items-center justify-center bg-gray-50 rounded-xl overflow-hidden">
-           <img 
+           <Image
               src={product.images?.[0] || "/product.jpeg"}
               alt={product.name}
-              className="w-full h-full object-contain filter mix-blend-multiply transition-transform duration-500 group-hover:scale-110"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-contain filter mix-blend-multiply transition-transform duration-500 group-hover:scale-110"
            />
            {product.discountPrice && (
               <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase shadow-md animate-bounce">
