@@ -7,9 +7,10 @@ import EnterStormOverlay from "@/components/public/EnterStormOverlay";
 import LightningEffect from "@/components/public/LightningEffect";
 import CreativeGallery from "@/components/public/CreativeGallery";
 import PremiumProducts from "@/components/public/PremiumProducts";
+import ContactSection from "@/components/public/ContactSection";
 import Footer from "@/components/public/Footer";
 import Link from "next/link";
-import { ShoppingBag, Mail, Phone, MapPin, Send } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 
 interface Product {
   _id: string;
@@ -25,11 +26,6 @@ export default function Home() {
   const [hasEntered, setHasEntered] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [settings, setSettings] = useState<any>({});
-  const [contactForm, setContactForm] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
 
   useEffect(() => {
     fetch("/api/products?limit=6")
@@ -198,145 +194,7 @@ export default function Home() {
         <CreativeGallery />
 
         {/* Contact Section */}
-        <section id="contact" className="bg-gray-50 text-black py-24 px-6">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-heading tracking-tighter font-bold text-gray-900 mb-4">
-                GET IN TOUCH
-              </h2>
-
-              <p className="text-gray-500 text-lg max-w-xl mx-auto">
-                Questions about our products? Want to collaborate? We&apos;d love
-                to hear from you.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-12">
-              {/* Contact Info */}
-              <div className="space-y-8">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center shrink-0">
-                    <Mail className="w-5 h-5 text-white" />
-                  </div>
-
-                  <div>
-                    <h3 className="font-bold text-gray-900 text-lg">Email</h3>
-                    <p className="text-gray-500">
-                      {settings.contactEmail || "contact@stormbarz.com"}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center shrink-0">
-                    <Phone className="w-5 h-5 text-white" />
-                  </div>
-
-                  <div>
-                    <h3 className="font-bold text-gray-900 text-lg">Phone</h3>
-                    <p className="text-gray-500">
-                      {settings.contactPhone || "+216 XX XXX XXX"}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center shrink-0">
-                    <MapPin className="w-5 h-5 text-white" />
-                  </div>
-
-                  <div>
-                    <h3 className="font-bold text-gray-900 text-lg">Location</h3>
-                    <p className="text-gray-500">
-                      {settings.contactAddress || "Tunisia"}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Contact Form */}
-              <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-                <form
-                  className="space-y-5"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    alert("Message sent! We will get back to you.");
-                    setContactForm({
-                      name: "",
-                      email: "",
-                      message: "",
-                    });
-                  }}
-                >
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={contactForm.name}
-                      onChange={(e) =>
-                        setContactForm((p) => ({
-                          ...p,
-                          name: e.target.value,
-                        }))
-                      }
-                      className="w-full bg-gray-50 border border-gray-200 text-gray-900 px-4 py-3 rounded-lg text-sm focus:outline-none focus:border-gray-400 transition-colors"
-                      placeholder="Your name"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={contactForm.email}
-                      onChange={(e) =>
-                        setContactForm((p) => ({
-                          ...p,
-                          email: e.target.value,
-                        }))
-                      }
-                      className="w-full bg-gray-50 border border-gray-200 text-gray-900 px-4 py-3 rounded-lg text-sm focus:outline-none focus:border-gray-400 transition-colors"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Message
-                    </label>
-                    <textarea
-                      rows={4}
-                      required
-                      value={contactForm.message}
-                      onChange={(e) =>
-                        setContactForm((p) => ({
-                          ...p,
-                          message: e.target.value,
-                        }))
-                      }
-                      className="w-full bg-gray-50 border border-gray-200 text-gray-900 px-4 py-3 rounded-lg text-sm focus:outline-none focus:border-gray-400 transition-colors resize-none"
-                      placeholder="Your message..."
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors flex items-center justify-center gap-2"
-                  >
-                    <Send className="w-4 h-4" />
-                    Send Message
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </section>
+        <ContactSection id="contact" theme="dark" />
 
         {/* Footer */}
         <Footer settings={settings} />
